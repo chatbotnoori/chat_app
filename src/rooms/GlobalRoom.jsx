@@ -42,7 +42,7 @@ const GlobalRoom = () => {
     setIsLoading(true);
     if (message && message?.length > 0) {
       const { data, error } = await supabaseClient
-        .from("Chats")
+        .from("chats")
         .insert({
           message,
           user_id: user?.user_id,
