@@ -244,7 +244,7 @@ const GlobalRoom = () => {
         if (data) setChats([...data]);
       } else {
         const { data, error } = await supabaseClient
-          .from("Chats")
+          .from("chats")
           .select("*")
           .eq("isDelete", false)
           .order("created_at", { ascending: true });
