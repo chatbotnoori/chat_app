@@ -42,7 +42,7 @@ const GlobalRoom = () => {
     setIsLoading(true);
     if (message && message?.length > 0) {
       const { data, error } = await supabaseClient
-        .from("chats")
+        .from("Chats")
         .insert({
           message,
           user_id: user?.user_id,
@@ -244,7 +244,7 @@ const GlobalRoom = () => {
         if (data) setChats([...data]);
       } else {
         const { data, error } = await supabaseClient
-          .from("chats")
+          .from("Chats")
           .select("*")
           .eq("isDelete", false)
           .order("created_at", { ascending: true });
