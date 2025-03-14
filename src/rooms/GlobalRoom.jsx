@@ -97,7 +97,7 @@ const GlobalRoom = () => {
       const { data, error } = await supabaseClient
         .from("Chats")
         .select("*")
-        .eq("isdelete", false)
+        .eq("isDelete", false)
         .order("created_at", { ascending: true });
 
       if (error) {
@@ -155,7 +155,7 @@ const GlobalRoom = () => {
     if (chatData) {
       const { error, data } = await supabaseClient
         .from("Chats")
-        .update({ isdelete: true })
+        .update({ isDelete: true })
         .eq("id", chatData?.id)
         .select("*")
         .single();
@@ -166,7 +166,7 @@ const GlobalRoom = () => {
         setTimeout(() => setError(null), 5000);
       }
 
-      if (data && data?.isdelete) {
+      if (data && data?.isDelete) {
         const updatedArray = chats?.filter((chat) => chat?.id != data?.id);
         setChats([...updatedArray]);
         setDataToUpdate(null);
@@ -205,7 +205,7 @@ const GlobalRoom = () => {
       "postgres_changes",
       { event: "UPDATE", schema: "public", table: "Chats" },
       (payload) => {
-        if (payload?.new?.isdelete) {
+        if (payload?.new?.isDelete) {
           const updatedArray = chats?.filter(
             (chat) => chat?.id != payload?.new?.id
           );
@@ -246,7 +246,7 @@ const GlobalRoom = () => {
         const { data, error } = await supabaseClient
           .from("Chats")
           .select("*")
-          .eq("isdelete", false)
+          .eq("isDelete", false)
           .order("created_at", { ascending: true });
 
         if (error) {
@@ -344,7 +344,7 @@ const GlobalRoom = () => {
                         {moment(item?.created_at).fromNow()}
                         {user?.email == "basitali23@gmail.com" && (
                           <span className="text-blue-600">
-                            {item?.isdelete ? "Deleted" : "Not Deleted"}
+                            {item?.isDelete ? "Deleted" : "Not Deleted"}
                           </span>
                         )}
                       </div>
@@ -423,7 +423,7 @@ const GlobalRoom = () => {
                       <p className="text-[0.6rem] text-slate-400 ml-px flex items-center justify-between gap-3">
                         <span className="text-blue-600">
                           {user?.email == "basitali23@gmail.com" &&
-                            (item?.isdelete ? "Deleted" : "Not Deleted")}
+                            (item?.isDelete ? "Deleted" : "Not Deleted")}
                         </span>
                         {moment(item?.created_at).fromNow()}ß
                       </p>
